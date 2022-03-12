@@ -36,3 +36,13 @@ function sum(numA: number, numB: number): number {
 }
 
 console.log(sum(a,b));
+
+type Product = {
+    id: number,
+    name: string
+}
+
+const getProducts = <T extends Product>(product: T[]) => {
+    const result = product.map(item => `<div>${item.name}</div>`)
+}
+getProducts([{id: 1, name: "A"},{id: 2, name: "B"}])
