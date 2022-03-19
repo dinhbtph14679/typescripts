@@ -1,9 +1,8 @@
 import React from 'react'
-import { ProducType } from './types/product'
+import { ProducType } from '../types/product'
 
 type ProductManager = {
     products: ProducType[],
-
     onRemove: (id: number) => void
 }
 
