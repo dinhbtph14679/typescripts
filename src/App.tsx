@@ -30,9 +30,9 @@ function App() {
     setProducts( products.filter(item => item.id !== id));
   }
 
-  const onHandleAdd = (data) => {
-    add(data);
-    setProducts([...products, data]);
+  const onHandlerAdd = (data) => {
+    add(data)
+    setProducts([...products, data])
   }
 
 
@@ -52,7 +52,7 @@ function App() {
                   <Route index element={<Navigate to="dashboard" />} />
                   <Route path="dashboard" element={<h1>Dashboard page</h1>} />
                   <Route path="products" element={<ProductManager products={products} onRemove={removeItem} />} />
-                  <Route path="/admin/products/add" element={<ProductAdd  onAdd={onHandleAdd} />}/>
+                  <Route path="/admin/products/add" element={<ProductAdd  onAdd={onHandlerAdd} />}/>
             </Route>
         </Routes>
     </div>
