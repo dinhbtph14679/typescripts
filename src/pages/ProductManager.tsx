@@ -2,7 +2,7 @@ import React from 'react'
 import { ProducType } from '../types/product'
 
 type ProductManager = {
-    products: ProducType[],
+    products : ProducType[],
     onRemove: (id: number) => void
 }
 
@@ -11,15 +11,17 @@ const ProductManager = ({products, onRemove}: ProductManager) => {
     <div>
         <table>
             <thead>
-                <th>STT</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Chuc nang</th>
+                <tr>
+                    <th>STT</th>
+                    <th>NAME</th>
+                    <th>Price</th>
+                    <th>Function</th>
+                </tr>
             </thead>
             <tbody>
                 {products?.map((item, index) => {
                     return <tr key={index}>
-                        <td>{index + 1}</td>
+                        <td>{index +1}</td>
                         <td>{item.name}</td>
                         <td>{item.price}</td>
                         <td>
