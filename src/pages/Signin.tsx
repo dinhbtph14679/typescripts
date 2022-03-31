@@ -2,6 +2,7 @@ import React from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import {signin, signup} from '../api/auth'
+import { authenticate, isAuthenticate } from '../utils/localstorage'
 
 
 type InputForm = {
@@ -16,8 +17,8 @@ const Signin = () => {
 
     const onSubmit: SubmitHandler<InputForm> = async data => {
         const {data: user} = await signin(data);
-        localStorage.setItem('user', JSON.stringify(user));
-        // navigate('/admin/products')
+        authenticate(user, () => navigate('/'));
+        navigate('/admin/products')
     }
   return (
     <div>

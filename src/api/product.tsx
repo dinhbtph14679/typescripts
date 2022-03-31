@@ -1,9 +1,6 @@
 import ProductManager from "../pages/ProductManager";
 import instance from "./instance";
-import { isAuthenticate } from "../utils/localstorage";
 import { ProducType } from "../types/product";
-
-const { token, user } = isAuthenticate();
 
 
 export const list = () =>{
@@ -17,12 +14,8 @@ export const remove = (id: number) => {
 }
 
 export const add = (products: ProducType) =>{
-    const url = `products/${user._id}`;
-    return instance.post(url, products), {
-        headers : {
-            "Authorization" : `Bearer ${token}`
-        }
-    };
+    const url = `products/`;
+    return instance.post(url, products)
 }
 
 export const read = (id: number) => {
