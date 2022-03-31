@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import logo from './logo.svg'
 import './App.css'
 import { Navigate, NavLink, Route, Router, Routes } from 'react-router-dom'
 import WebsiteLayouts from './pages/layouts/WebsiteLayouts'
@@ -10,6 +9,9 @@ import { ProducType } from './types/product'
 import { add, list, remove } from './api/product'
 import ProductManager from './pages/ProductManager'
 import ProductAdd from './pages/layouts/ProductAdd'
+import Signin from './pages/Signin'
+import Signup from './pages/Signup'
+import PrivateRouter from './components/PrivateRouter'
 
 function App() {
 
@@ -30,7 +32,7 @@ function App() {
     setProducts( products.filter(item => item.id !== id));
   }
 
-  const onHandlerAdd = (data) => {
+  const onHandlerAdd = (data: ProducType) => {
     add(data)
     setProducts([...products, data])
   }
@@ -38,7 +40,7 @@ function App() {
 
 
   return (
-    <div className="container">
+    <div>
         <Routes>
             <Route path="/" element={<WebsiteLayouts />}>
                   <Route index element={<HomePage />} />
@@ -48,12 +50,14 @@ function App() {
                   </Route>             
                   <Route path='*' element={<h1>NOT FOUND</h1>} />
             </Route>
-            <Route path="admin" element={<AdminLayouts />}>
+            <Route path="admin" element={<PrivateRouter chlidren={undefined}><AdminLayouts /></PrivateRouter>}>
                   <Route index element={<Navigate to="dashboard" />} />
                   <Route path="dashboard" element={<h1>Dashboard page</h1>} />
                   <Route path="products" element={<ProductManager products={products} onRemove={removeItem} />} />
                   <Route path="/admin/products/add" element={<ProductAdd  onAdd={onHandlerAdd} />}/>
             </Route>
+            <Route path='signin' element={<Signin />}/>
+            <Route path='signup' element={<Signup />}/>
         </Routes>
     </div>
   )
