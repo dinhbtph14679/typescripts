@@ -1,22 +1,22 @@
 import React from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
-import {signin, signup} from '../api/auth'
+import { signup} from '../api/auth'
 
 
 type InputForm = {
     name: string,
     email: string,
-    password: string | number
+    password: string 
 }
 
 const Signup = () => {
     const { handleSubmit, formState: {errors}, register } = useForm<InputForm>();
     const navigate = useNavigate();
 
-    const onSubmit: SubmitHandler<InputForm> = async data => {
+    const onSubmit: SubmitHandler<InputForm> = data => {
         signup(data);
-        // navigate('/admin/products')
+        navigate('/')
     }
   return (
     <div>

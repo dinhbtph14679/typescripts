@@ -8,8 +8,8 @@ type PrivateRouterProps = {
 }
 
 const PrivateRouter = (props: PrivateRouterProps) => {
-    const { user } = isAuthenticate();
-    if(!user?.role){
+    const { user: {role} } = isAuthenticate();
+    if(!role){
         return <Navigate to="/signin" />
     }
     return props.chlidren
