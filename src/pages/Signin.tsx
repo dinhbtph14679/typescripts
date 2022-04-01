@@ -17,10 +17,8 @@ const Signin = () => {
 
     const onSubmit: SubmitHandler<InputForm> = async data => {
         const {data: user} = await signin(data);
-        console.log(user);
-        
         authenticated(user, () => {
-            navigate('/')
+            navigate('/admin/products')
         })
         // navigate('/admin/products')
     }

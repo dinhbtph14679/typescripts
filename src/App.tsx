@@ -50,7 +50,7 @@ function App() {
                   </Route>             
                   <Route path='*' element={<h1>NOT FOUND</h1>} />
             </Route>
-            <Route path="admin" element={<PrivateRouter chlidren={undefined}><AdminLayouts /></PrivateRouter>}>
+            <Route path="admin" element={<AdminLayouts/>}>
                   <Route index element={<Navigate to="dashboard" />} />
                   <Route path="dashboard" element={<h1>Dashboard page</h1>} />
                   <Route path="products" element={<ProductManager products={products} onRemove={removeItem} />} />
