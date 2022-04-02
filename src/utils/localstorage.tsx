@@ -1,7 +1,7 @@
 import { UserType } from "../types/user";
 
 export const authenticated  = (user: UserType, next: () => void) => {
-    localStorage.setItem('user', JSON.stringify('user'));
+    localStorage.setItem('user', JSON.stringify(user.role));
     next()
 }
 

@@ -1,37 +1,35 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { ProducType } from '../types/product'
+import { CategoryType } from '../../../types/Category'
 
-type ProductManager = {
-    products : ProducType[],
-    onRemove: (id: number) => void
+type ListCategory = {
+    category: CategoryType[],
+    ondelete: (id: number) => void
 }
 
-const ProductManager = ({products, onRemove}: ProductManager) => {
+const ListCategory = ({category, ondelete}: ListCategory) => {
   return (
     <div>
         <div className="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 className="py-2 h3 mb-0 text-black-800">Quản lý sản phẩm</h1>
+            <h1 className="py-2 h3 mb-0 text-black-800">Quản lý danh mục</h1>
         </div>
-        <NavLink className="nav-link text-center bg-success text-light mb-5" to="/admin/products/add">Add</NavLink>
+        <NavLink className="nav-link text-center bg-success text-light mb-5" to="/admin/categorys/add">Add</NavLink>
         <div className="table-responsive">
                                 <table className="table table-bordered" id="dataTable" width="100%" cellSpacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
+                                            <th>STT</th>
+                                            <th>Tên sản phẩm</th>
+                                            <th>Chức năng</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {products?.map((item, index) => {
+                                        {category?.map((item, index) => {
                                             return <tr key={index}>
                                                 <td>{index +1}</td>
                                                 <td>{item.name}</td>
-                                                <td>{item.price}</td>
                                                 <td>
-                                                    <button className='btn btn-danger' onClick={() => onRemove(item.id)}>Remove</button>
+                                                    <button className='btn btn-danger' onClick={() => ondelete(item.id)}>Xóa</button>
                                                 </td>
                                             </tr>
                                         })}
@@ -42,4 +40,8 @@ const ProductManager = ({products, onRemove}: ProductManager) => {
   )
 }
 
-export default ProductManager
+export default ListCategory
+
+function ondelete(id: number | undefined): void {
+    throw new Error('Function not implemented.')
+}

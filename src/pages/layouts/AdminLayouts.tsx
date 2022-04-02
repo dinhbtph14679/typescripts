@@ -29,7 +29,7 @@ const AdminLayouts = (props: Props) => {
                             <span>Thống Kê</span></NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink className="nav-link" to="/admin/category">
+                        <NavLink className="nav-link" to="/admin/categorys">
                             <i className="fa-solid fa-align-justify"></i>
                             <span>Quản lý danh mục</span></NavLink>
                     </li>

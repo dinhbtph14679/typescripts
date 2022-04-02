@@ -1,5 +1,7 @@
 export type UserType = {
     name?: string,
     email: string,
-    password: string
+    password: string,
+    role: number,
+    salt: string
 }

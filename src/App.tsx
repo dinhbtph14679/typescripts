@@ -2,20 +2,24 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import { Navigate, NavLink, Route, Router, Routes } from 'react-router-dom'
 import WebsiteLayouts from './pages/layouts/WebsiteLayouts'
-import HomePage from './pages/homepage'
-import ProductDetailt from './pages/ProductDetailt'
+import HomePage from './pages/client/homepage'
+import ProductDetailt from './pages/admin/products/ProductDetailt'
 import AdminLayouts from './pages/layouts/AdminLayouts'
 import { ProducType } from './types/product'
 import { add, list, remove } from './api/product'
-import ProductManager from './pages/ProductManager'
-import ProductAdd from './pages/layouts/ProductAdd'
-import Signin from './pages/Signin'
-import Signup from './pages/Signup'
+import ProductManager from './pages/admin/products/ProductManager'
+import Signin from './pages/client/Signin'
+import Signup from './pages/client/Signup'
 import PrivateRouter from './components/PrivateRouter'
+import ProductAdd from './pages/admin/products/ProductAdd'
+import { CategoryType } from './types/Category'
+import ListCategory from './pages/admin/category/ListCategory'
+import { listCT, removeCT } from './api/category'
 
 function App() {
 
   const [products, setProducts] = useState<ProducType[]>([]);
+  const [categorys, setCategorys] = useState<CategoryType[]>([]);
 
   useEffect(() =>{
 
@@ -24,12 +28,19 @@ function App() {
       setProducts(data);
     }
     getProducts()
+  },[])
 
-  })
+  useEffect(() => {
+    const getCategory = async () => {
+      const { data } = await listCT();
+      setCategorys(data);
+    }
+    getCategory()
+  },[])
 
   const removeItem = (id: number) => {
     remove(id);
-    setProducts( products.filter(item => item.id !== id));
+    setProducts(products.filter(item => item.id !== id));
   }
 
   const onHandlerAdd = (data: ProducType) => {
@@ -37,6 +48,10 @@ function App() {
     setProducts([...products, data])
   }
 
+  const ondeleteCategory = (id: number) => {
+      removeCT(id);
+      setCategorys(categorys.filter(item => item.id !== id))
+  }
 
 
   return (
@@ -50,11 +65,16 @@ function App() {
                   </Route>             
                   <Route path='*' element={<h1>NOT FOUND</h1>} />
             </Route>
-            <Route path="admin" element={<AdminLayouts/>}>
+            <Route path="admin" element={<PrivateRouter><AdminLayouts/></PrivateRouter>}>
                   <Route index element={<Navigate to="dashboard" />} />
                   <Route path="dashboard" element={<h1>Dashboard page</h1>} />
-                  <Route path="products" element={<ProductManager products={products} onRemove={removeItem} />} />
-                  <Route path="/admin/products/add" element={<ProductAdd  onAdd={onHandlerAdd} />}/>
+                  <Route path="products">
+                    <Route index element={<ProductManager products={products} onRemove={removeItem} />} />
+                    <Route path="add" element={<ProductAdd onAdd={onHandlerAdd} />}/>
+                  </Route>
+                  <Route path='categorys'>
+                      <Route index element={<ListCategory category={categorys} ondelete={ondeleteCategory}/>} />
+                  </Route>
             </Route>
             <Route path='signin' element={<Signin />}/>
             <Route path='signup' element={<Signup />}/>
