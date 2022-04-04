@@ -8,7 +8,7 @@ const PrivateRouter = (props: { children: JSX.Element}) => {
     const user = isAuthenticate();
 
     if(!user) {
-        return <Navigate to="/signin" />
+        return <Navigate to="/" />
     }
     return props.children
   }

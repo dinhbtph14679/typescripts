@@ -17,13 +17,16 @@ const Signin = () => {
 
     const onSubmit: SubmitHandler<InputForm> = async data => {
         const {data : response} = await signin(data);
-        
-        // console.log(response);
+        console.log(response);
         
         authenticated(response.user, () => {    
-        navigate('/admin/dashboard')
-        })
         navigate('/')
+        })
+        if (response.user.role == 1) {
+            navigate("/admin/dashboard")
+        }else{
+            navigate("/")
+        }
     }
   return (
     <div className="container">

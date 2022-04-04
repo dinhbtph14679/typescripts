@@ -14,7 +14,8 @@ import PrivateRouter from './components/PrivateRouter'
 import ProductAdd from './pages/admin/products/ProductAdd'
 import { CategoryType } from './types/Category'
 import ListCategory from './pages/admin/category/ListCategory'
-import { listCT, removeCT } from './api/category'
+import { addCT, listCT, removeCT } from './api/category'
+import CategoryAdd from './pages/admin/category/CategoryAdd'
 
 function App() {
 
@@ -52,7 +53,10 @@ function App() {
       removeCT(id);
       setCategorys(categorys.filter(item => item.id !== id))
   }
-
+  const handlerAddcategory =(data: CategoryType) => {
+    addCT(data);
+    setCategorys([...categorys,data])
+  }
 
   return (
     <div>
@@ -70,10 +74,11 @@ function App() {
                   <Route path="dashboard" element={<h1>Dashboard page</h1>} />
                   <Route path="products">
                     <Route index element={<ProductManager products={products} onRemove={removeItem} />} />
-                    <Route path="add" element={<ProductAdd onAdd={onHandlerAdd} />}/>
+                    <Route path="add" element={<ProductAdd onAdd={onHandlerAdd} categorys={categorys}/>}/>
                   </Route>
                   <Route path='categorys'>
                       <Route index element={<ListCategory category={categorys} ondelete={ondeleteCategory}/>} />
+                      <Route path='add' element={<CategoryAdd onAddCT={handlerAddcategory}/>} />
                   </Route>
             </Route>
             <Route path='signin' element={<Signin />}/>

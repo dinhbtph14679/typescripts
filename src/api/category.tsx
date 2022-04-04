@@ -6,30 +6,26 @@ import instance from "./instance";
 const {token, user} = isAuthenticate()
 
 export const listCT = () => {
-    const url = `categorys`;
+    const url = `category`;
     return instance.get(url)
 }
 
 export const readCT = (id: number) => {
-    const url = `categorys/${id}`;
+    const url = `category/${id}`;
     return instance.get(url)
 }
 
 export const removeCT = (id: number) => {
-    const url = `categorys/${id}`;
+    const url = `category/${id}`;
     return instance.delete(url)
 }
 
 export const updateCT = (data: CategoryType) => {
-    const url = `categorys/${data.id}`;
+    const url = `category/${data.id}`;
     return instance.put(url,data)
 }
 
 export const addCT = (data: CategoryType) => {
-    const url = `categorys/${user._id}`;
-    return instance.post(url,data,{
-        headers: {
-            "Authorization" : `Bearer ${token}`
-        }
-    })
+    const url = `category/`;
+    return instance.post(url,data)
 }

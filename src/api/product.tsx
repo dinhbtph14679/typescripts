@@ -20,9 +20,9 @@ export const remove = (id: number) => {
 
 export const add = (products: ProducType) =>{
     const url = `products/${user._id}`;
-    return instance.post(url, products, {
+    return instance.post(url, products,{
         headers: {
-            "Authorization" : `Bearer ${token}`
+            "Authorization": `Bearer ${token}`
         }
     })
 }

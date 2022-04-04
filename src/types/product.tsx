@@ -1,5 +1,6 @@
 export type ProducType = {
     id?: number,
     name: string,
-    price: number
+    price: number,
+    category:string
 }
