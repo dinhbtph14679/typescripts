@@ -20,7 +20,7 @@ const ListCategory = ({category, ondelete}: ListCategory) => {
                                         <tr>
                                             <th>STT</th>
                                             <th>Tên sản phẩm</th>
-                                            <th>Chức năng</th>
+                                            <th colSpan={2}>Chức năng</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -30,6 +30,7 @@ const ListCategory = ({category, ondelete}: ListCategory) => {
                                                 <td>{item.name}</td>
                                                 <td>
                                                     <button className='btn btn-danger' onClick={() => ondelete(item.id)}>Xóa</button>
+                                                    <NavLink to="/admin/categorys/edit/:">Edit</NavLink>
                                                 </td>
                                             </tr>
                                         })}
