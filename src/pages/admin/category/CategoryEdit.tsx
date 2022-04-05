@@ -2,33 +2,33 @@ import React, { useEffect  } from 'react'
 import { ProducType } from '../../../types/product'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useNavigate , useParams} from 'react-router-dom'
-import { read } from '../../../api/product'
+import { readCT } from '../../../api/category'
+import { CategoryType } from '../../../types/Category'
 
 type ProductEdit = {
-  onUpdateCT : (products: ProducType) => void
+  onUpdate : (products: ProducType) => void
 }
 
 type InputForm = {
   name: string,
-  price: number
 }
 
-const ProductEdit = ({onUpdateCT}: ProductEdit) => {
-  const { register, handleSubmit, formState: {errors},  reset} = useForm<ProducType>()
+const CategoryEdit = ({onUpdate}: ProductEdit) => {
+  const { register, handleSubmit, formState: {errors},  reset} = useForm<CategoryType>()
   const navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(()=>{
     const getProduct =  async () =>{
-      const { data } = await read(id);
+      const { data } = await readCT(id);
       reset(data)
     }
     getProduct();
   },[])
 
   const onSumit:SubmitHandler<InputForm> = data => {
-    onUpdateCT(data);
-    navigate('/admin/categorys')
+    onUpdate(data);
+    navigate('/admin/products')
   }
 
   return (
@@ -36,10 +36,11 @@ const ProductEdit = ({onUpdateCT}: ProductEdit) => {
       <form onSubmit={handleSubmit(onSumit)}>
           <input type="text" {...register('name', {required:true})} />
           {errors.name && <span>K duoc de trong</span>}
+          <input type="number" {...register('price')} />
           <button>Update</button>
       </form>
     </div>
   )
 }
 
-export default ProductEdit
+export default CategoryEdit

@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { ProducType } from '../../../types/product'
 
 type ProductManager = {
@@ -8,12 +8,13 @@ type ProductManager = {
 }
 
 const ProductManager = ({products, onRemove}: ProductManager) => {
+    const navigate = useNavigate()
   return (
     <div>
         <div className="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 className="py-2 h3 mb-0 text-black-800">Quản lý sản phẩm</h1>
         </div>
-        <NavLink className="nav-link text-center bg-success text-light mb-5" to="/admin/products/add">Add</NavLink>
+        <a className="nav-link text-center bg-success text-light mb-5" href="/admin/products/add">Add</a>
         <div className="table-responsive">
                                 <table className="table table-bordered" id="dataTable" width="100%" cellSpacing="0">
                                     <thead>
@@ -31,7 +32,8 @@ const ProductManager = ({products, onRemove}: ProductManager) => {
                                                 <td>{item.name}</td>
                                                 <td>{item.price}</td>
                                                 <td>
-                                                    <button className='btn btn-danger' onClick={() => onRemove(item.id)}>Remove</button>
+                                                    <a className='' onClick={() => onRemove(item._id)}>Remove</a>
+                                                    <button className='btn btn-dark' onClick={() => navigate(`/admin/products/${item._id}/edit`)}>Edit</button>
                                                 </td>
                                             </tr>
                                         })}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink , useNavigate} from 'react-router-dom'
 import { CategoryType } from '../../../types/Category'
 
 type ListCategory = {
@@ -8,6 +8,7 @@ type ListCategory = {
 }
 
 const ListCategory = ({category, ondelete}: ListCategory) => {
+    const navigate = useNavigate()
   return (
     <div>
         <div className="d-sm-flex align-items-center justify-content-between mb-4">
@@ -29,8 +30,8 @@ const ListCategory = ({category, ondelete}: ListCategory) => {
                                                 <td>{index +1}</td>
                                                 <td>{item.name}</td>
                                                 <td>
-                                                    <button className='btn btn-danger' onClick={() => ondelete(item.id)}>Xóa</button>
-                                                    <NavLink to="/admin/categorys/edit/:">Edit</NavLink>
+                                                    <button className='btn btn-danger' onClick={() => ondelete(item._id)}>Xóa</button>
+                                                    <button className='btn btn-dark' onClick={() => {navigate(`/admin/categorys/${item._id}/edit`)}}>Edit</button>
                                                 </td>
                                             </tr>
                                         })}
@@ -42,7 +43,3 @@ const ListCategory = ({category, ondelete}: ListCategory) => {
 }
 
 export default ListCategory
-
-function ondelete(id: number | undefined): void {
-    throw new Error('Function not implemented.')
-}
