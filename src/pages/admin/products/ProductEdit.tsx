@@ -5,7 +5,7 @@ import { useNavigate , useParams} from 'react-router-dom'
 import { read } from '../../../api/product'
 
 type ProductEdit = {
-  onUpdateCT : (products: ProducType) => void
+  onUpdate : (products: ProducType) => void
 }
 
 type InputForm = {
@@ -13,7 +13,7 @@ type InputForm = {
   price: number
 }
 
-const ProductEdit = ({onUpdateCT}: ProductEdit) => {
+const ProductEdit = ({onUpdate}: ProductEdit) => {
   const { register, handleSubmit, formState: {errors},  reset} = useForm<ProducType>()
   const navigate = useNavigate();
   const { id } = useParams();
@@ -27,7 +27,7 @@ const ProductEdit = ({onUpdateCT}: ProductEdit) => {
   },[])
 
   const onSumit:SubmitHandler<InputForm> = data => {
-    onUpdateCT(data);
+    onUpdate(data);
     navigate('/admin/categorys')
   }
 

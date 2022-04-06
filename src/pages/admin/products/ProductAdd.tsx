@@ -1,21 +1,19 @@
-import React from 'react'
 import { ProducType } from '../../../types/product'
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { NavLink, useNavigate } from 'react-router-dom';
-import { CategoryType } from '../../../types/Category';
 
 type ProductAdd = {
     onAdd : (products: ProducType) => void,
-    categorys: CategoryType[]
+    product: ProducType[]
 }
 
 type FormInput = {
     name: string,
     price: number,
-    category: string
+    categoryid: string
 }
 
-const ProductAdd = ({onAdd, categorys}: ProductAdd) => {
+const ProductAdd = ({onAdd, product}: ProductAdd) => {
 
     const {register, handleSubmit, formState: {errors}} = useForm<FormInput>()
     const navigate = useNavigate();
@@ -39,13 +37,13 @@ const ProductAdd = ({onAdd, categorys}: ProductAdd) => {
             <div className="form-group">
                 <label>Danh mục</label>
                 <select>
-                    {categorys?.map(item => {
-                        return <option value="">{item.name}</option>
+                    {product?.map(item => {
+                        return <option value="">{item.categoryid.name}</option>
                     })}
                 </select>
             </div>
             <button type="submit" className="btn btn-success">Add</button>
-            <NavLink className="btn btn-primary" to="/admin/products">Back</NavLink>
+            <NavLink className="btn btn-warning" to="/admin/products">Back</NavLink>
         </form>
     </div>
   )

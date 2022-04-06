@@ -70,10 +70,14 @@ function App() {
     setProducts(products.map(item => item.id === data.id ? data : item));
   }
 
-  const onUpdateCategory = async(category: CategoryType) => {
+  const onUpdateCategory = async (category: CategoryType) => {
     const { data } = await updateCT(category);
-    setCategorys(category.map(item => item._id === data.id ? data : item))
+    setCategorys(categorys.map(item => item._id === data._id ? data : item))
   }
+  const onHandleUpdate = async (product: ProducType) => {
+    const { data } = await update(product);
+    setProducts(products.map(item => item.id === data.id ? data : item ));
+}
 
   return (
     <div>
@@ -88,11 +92,11 @@ function App() {
             </Route>
             <Route path="admin" element={<PrivateRouter><AdminLayouts/></PrivateRouter>}>
                   <Route index element={<Navigate to="dashboard" />} />
-                  <Route path="dashboard" element={<h1>Dashboard page</h1>} />
+                  <Route path="dashboard" element={<h1>Dashboard page</h1>} />  
                   <Route path="products">
-                    <Route index element={<ProductManager products={products} onRemove={removeItem} />} />
-                    <Route path="add" element={<ProductAdd onAdd={onHandlerAdd} categorys={categorys}/>}/>
-                    <Route path=':id/edit' element={<ProductEdit onUpdate={onUpdateProduct}/>} />
+                      <Route index element={<ProductManager products={products} onRemove={removeItem} />} />
+                      <Route path="add" element={<ProductAdd onAdd={onHandlerAdd} product={products}/>}/>
+                      <Route path=':id/edit' element={<ProductEdit onUpdate={onUpdateProduct}/>} />
                   </Route>
                   <Route path='categorys'>
                       <Route index element={<ListCategory category={categorys} ondelete={ondeleteCategory}/>} />

@@ -1,34 +1,34 @@
 import React, { useEffect  } from 'react'
 import { ProducType } from '../../../types/product'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { useNavigate , useParams} from 'react-router-dom'
+import { NavLink, useNavigate , useParams} from 'react-router-dom'
 import { readCT } from '../../../api/category'
 import { CategoryType } from '../../../types/Category'
 
-type ProductEdit = {
-  onUpdate : (products: ProducType) => void
+type CategoryEdit = {
+  onUpdateCT: (category: CategoryType) => void
 }
 
 type InputForm = {
   name: string,
 }
 
-const CategoryEdit = ({onUpdate}: ProductEdit) => {
-  const { register, handleSubmit, formState: {errors},  reset} = useForm<CategoryType>()
+const CategoryEdit = (props : CategoryEdit) => {
+  const { register, handleSubmit, formState: {errors},  reset} = useForm<InputForm>()
   const navigate = useNavigate();
   const { id } = useParams();
 
   useEffect(()=>{
-    const getProduct =  async () =>{
+    const getCategory =  async () =>{
       const { data } = await readCT(id);
       reset(data)
     }
-    getProduct();
+    getCategory();
   },[])
 
-  const onSumit:SubmitHandler<InputForm> = data => {
-    onUpdate(data);
-    navigate('/admin/products')
+  const onSumit:SubmitHandler<InputForm> = data  => {
+     props.onUpdateCT(data);
+    navigate('/admin/categorys')
   }
 
   return (
@@ -36,8 +36,8 @@ const CategoryEdit = ({onUpdate}: ProductEdit) => {
       <form onSubmit={handleSubmit(onSumit)}>
           <input type="text" {...register('name', {required:true})} />
           {errors.name && <span>K duoc de trong</span>}
-          <input type="number" {...register('price')} />
-          <button>Update</button>
+          <NavLink className='btn btn-dark' to="/admin/categorys">Back</NavLink>
+          <button className='btn btn-success'>Update</button>
       </form>
     </div>
   )

@@ -1,3 +1,4 @@
+
 import React from 'react'
 import { NavLink , useNavigate} from 'react-router-dom'
 import { CategoryType } from '../../../types/Category'
@@ -16,11 +17,11 @@ const ListCategory = ({category, ondelete}: ListCategory) => {
         </div>
         <NavLink className="nav-link text-center bg-success text-light mb-5" to="/admin/categorys/add">Add</NavLink>
         <div className="table-responsive">
-                                <table className="table table-bordered" id="dataTable" width="100%" cellSpacing="0">
+                                <table className="table table-bordered">
                                     <thead>
                                         <tr>
                                             <th>STT</th>
-                                            <th>Tên sản phẩm</th>
+                                            <th>Tên danh mục</th>
                                             <th colSpan={2}>Chức năng</th>
                                         </tr>
                                     </thead>
@@ -30,8 +31,8 @@ const ListCategory = ({category, ondelete}: ListCategory) => {
                                                 <td>{index +1}</td>
                                                 <td>{item.name}</td>
                                                 <td>
-                                                    <button className='btn btn-danger' onClick={() => ondelete(item._id)}>Xóa</button>
-                                                    <button className='btn btn-dark' onClick={() => {navigate(`/admin/categorys/${item._id}/edit`)}}>Edit</button>
+                                                    <button className='btn btn-primary' onClick={() => {navigate(`/admin/categorys/${item._id}/edit`)}}>Edit</button>
+                                                    <button className='btn btn-danger' onClick={() => ondelete(item._id)}>Delete</button>
                                                 </td>
                                             </tr>
                                         })}
