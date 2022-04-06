@@ -38,7 +38,7 @@ const ProductAdd = ({onAdd, product}: ProductAdd) => {
                 <label>Danh mục</label>
                 <select>
                     {product?.map(item => {
-                        return <option value="">{item.categoryid.name}</option>
+                        return <option value="">{item.categoryid}</option>
                     })}
                 </select>
             </div>
