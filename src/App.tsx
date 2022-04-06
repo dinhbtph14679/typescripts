@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import './App.css'
 import { Navigate, NavLink, Route, Router, Routes } from 'react-router-dom'
 import WebsiteLayouts from './pages/layouts/WebsiteLayouts'
-import HomePage from './pages/client/homepage'
+import HomePage from './pages/client/home/homepage'
 import ProductDetailt from './pages/admin/products/ProductDetailt'
 import AdminLayouts from './pages/layouts/AdminLayouts'
 import { ProducType } from './types/product'
@@ -18,6 +18,12 @@ import { addCT, listCT, removeCT, updateCT } from './api/category'
 import CategoryAdd from './pages/admin/category/CategoryAdd'
 import ProductEdit from './pages/admin/products/ProductEdit'
 import CategoryEdit from './pages/admin/category/CategoryEdit'
+import Cart from './pages/client/cart/Cart'
+import Blog from './pages/client/blogs/Blog'
+import AboutPage from './pages/client/About/aboutpage'
+import ContactPage from './pages/client/contacts/Contact'
+import Page404 from './pages/client/Page404'
+import ProductPage from './pages/client/products/productpage'
 
 function App() {
 
@@ -79,16 +85,21 @@ function App() {
     setProducts(products.map(item => item.id === data.id ? data : item ));
 }
 
+
   return (
     <div>
         <Routes>
             <Route path="/" element={<WebsiteLayouts />}>
                   <Route index element={<HomePage />} />
                   <Route path='products'>
-                      <Route index element={<h1>Products Page</h1>} />
+                      <Route index element={<ProductPage />} />
                       <Route path=':id' element={<ProductDetailt />} />
-                  </Route>             
-                  <Route path='*' element={<h1>NOT FOUND</h1>} />
+                  </Route>
+                  <Route path='abouts' element={<AboutPage />} />     
+                  <Route path='contacts' element={<ContactPage />} />             
+                  <Route path='blogs' element={<Blog />} /> 
+                  <Route path='carts' element={<Cart />} />             
+                  <Route path='*' element={<Page404 />} />
             </Route>
             <Route path="admin" element={<PrivateRouter><AdminLayouts/></PrivateRouter>}>
                   <Route index element={<Navigate to="dashboard" />} />
