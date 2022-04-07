@@ -1,5 +1,4 @@
 import React, { useEffect  } from 'react'
-import { ProducType } from '../../../types/product'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { NavLink, useNavigate , useParams} from 'react-router-dom'
 import { readCT } from '../../../api/category'
@@ -17,17 +16,22 @@ const CategoryEdit = (props : CategoryEdit) => {
   const { register, handleSubmit, formState: {errors},  reset} = useForm<InputForm>()
   const navigate = useNavigate();
   const { id } = useParams();
+  
 
   useEffect(()=>{
     const getCategory =  async () =>{
-      const { data } = await readCT(id);
-      reset(data)
+      const { data } = await readCT(id); 
+      reset(data.category)
+      // console.log(reset(data));
+      
     }
     getCategory();
   },[])
 
+  
   const onSumit:SubmitHandler<InputForm> = data  => {
      props.onUpdateCT(data);
+     console.log(data);
     navigate('/admin/categorys')
   }
 

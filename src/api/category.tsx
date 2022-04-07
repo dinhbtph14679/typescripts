@@ -21,7 +21,7 @@ export const removeCT = (id: number) => {
 }
 
 export const updateCT = (data: CategoryType) => {
-    const url = `category/${data.id}`;
+    const url = `category/${data._id}`;
     return instance.put(url,data)
 }
 

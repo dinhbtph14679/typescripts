@@ -28,7 +28,7 @@ const ProductEdit = ({onUpdate}: ProductEdit) => {
 
   const onSumit:SubmitHandler<InputForm> = data => {
     onUpdate(data);
-    navigate('/admin/categorys')
+    navigate('/admin/categorys');
   }
 
   return (

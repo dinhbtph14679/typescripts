@@ -71,18 +71,15 @@ function App() {
     setCategorys([...categorys,data])
   }
 
-  const onUpdateProduct = async (product: ProducType) => {
-    const { data } = await update(product);
-    setProducts(products.map(item => item.id === data.id ? data : item));
-  }
 
   const onUpdateCategory = async (category: CategoryType) => {
     const { data } = await updateCT(category);
     setCategorys(categorys.map(item => item._id === data._id ? data : item))
   }
+
   const onHandleUpdate = async (product: ProducType) => {
     const { data } = await update(product);
-    setProducts(products.map(item => item.id === data.id ? data : item ));
+    setProducts(products.map(item => item._id === data._id ? data : item ));
 }
 
 
@@ -107,7 +104,7 @@ function App() {
                   <Route path="products">
                       <Route index element={<ProductManager products={products} onRemove={removeItem} />} />
                       <Route path="add" element={<ProductAdd onAdd={onHandlerAdd} product={products}/>}/>
-                      <Route path=':id/edit' element={<ProductEdit onUpdate={onUpdateProduct}/>} />
+                      <Route path=':id/edit' element={<ProductEdit onUpdate={onHandleUpdate}/>} />
                   </Route>
                   <Route path='categorys'>
                       <Route index element={<ListCategory category={categorys} ondelete={ondeleteCategory}/>} />
