@@ -28,6 +28,7 @@ const WebsiteLayouts = (props: Props) => {
                     <div className="col-lg-3">
                         <div className="header__cart">
                             <ul>
+                                <li><NavLink to="/signin"><i className="fa-solid fa-user"></i></NavLink></li>
                                 <li><NavLink to="/carts"><i className="fa fa-shopping-bag"></i> <span>3</span></NavLink></li>
                             </ul>
                             <div className="header__cart__price">item: <span>$150.00</span></div>
