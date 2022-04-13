@@ -15,7 +15,7 @@ const ListCategory = ({category, ondelete}: ListCategory) => {
         <div className="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 className="py-2 h3 mb-0 text-black-800">Quản lý danh mục</h1>
         </div>
-        <NavLink className="nav-link text-center bg-success text-light mb-5" to="/admin/categorys/add">Add</NavLink>
+        <NavLink className="nav-link text-center bg-success text-light mb-5" to="/admin/categorys/add">Thêm</NavLink>
         <div className="table-responsive">
                                 <table className="table table-bordered">
                                     <thead>
@@ -31,8 +31,8 @@ const ListCategory = ({category, ondelete}: ListCategory) => {
                                                 <td>{index +1}</td>
                                                 <td>{item.name}</td>
                                                 <td>
-                                                    <button className='btn btn-primary' onClick={() => {navigate(`/admin/categorys/${item._id}/edit`)}}>Edit</button>
-                                                    <button className='btn btn-danger' onClick={() => ondelete(item._id)}>Delete</button>
+                                                    <button className='btn btn-primary' onClick={() => {navigate(`/admin/categorys/${item._id}/edit`)}}>Sửa</button>
+                                                    <button className='btn btn-danger' onClick={() => ondelete(id)}>Xóa</button>
                                                 </td>
                                             </tr>
                                         })}

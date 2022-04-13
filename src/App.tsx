@@ -70,6 +70,9 @@ function App() {
     addCT(data);
     setCategorys([...categorys,data])
   }
+  const listProduct = () => {
+      list();
+  }
 
 
   const onUpdateCategory = async (category: CategoryType) => {
@@ -89,7 +92,7 @@ function App() {
             <Route path="/" element={<WebsiteLayouts />}>
                   <Route index element={<HomePage />} />
                   <Route path='products'>
-                      <Route index element={<ProductPage />} />
+                      <Route index element={<ProductPage products={products}/>} />
                       <Route path=':id' element={<ProductDetailt />} />
                   </Route>
                   <Route path='abouts' element={<AboutPage />} />     
@@ -103,7 +106,7 @@ function App() {
                   <Route path="dashboard" element={<h1>Dashboard page</h1>} />  
                   <Route path="products">
                       <Route index element={<ProductManager products={products} onRemove={removeItem} />} />
-                      <Route path="add" element={<ProductAdd onAdd={onHandlerAdd} product={products}/>}/>
+                      <Route path="add" element={<ProductAdd onAdd={onHandlerAdd} onList={listProduct} products={products}/>}/>
                       <Route path=':id/edit' element={<ProductEdit onUpdate={onHandleUpdate}/>} />
                   </Route>
                   <Route path='categorys'>

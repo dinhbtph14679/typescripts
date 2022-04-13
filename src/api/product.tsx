@@ -4,9 +4,6 @@ import { isAuthenticate } from "../utils/localstorage";
 
 
 
-const { token, user } = isAuthenticate()
-
-
 
 export const list = () =>{
     const url = `/products`;
@@ -19,12 +16,8 @@ export const remove = (id: number) => {
 }
 
 export const add = (products: ProducType) =>{
-    const url = `products/${user._id}`;
-    return instance.post(url, products,{
-        headers: {
-            "Authorization": `Bearer ${token}`
-        }
-    })
+    const url = `products/`;
+    return instance.post(url, products)
 }
 
 export const read = (id: number) => {
@@ -33,6 +26,6 @@ export const read = (id: number) => {
 }
 
 export const update = (product: ProducType) => {
-    const url = `/products/${product.id}`;
+    const url = `/products/${product._id}`;
     return instance.put(url, product);
 }

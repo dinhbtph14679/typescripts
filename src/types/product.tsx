@@ -2,5 +2,6 @@ export type ProducType = {
     _id?: number,
     name: string,
     price: number,
-    categoryid:string
+    description: string,
+    category:string,
 }

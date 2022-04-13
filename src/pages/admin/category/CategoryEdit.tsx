@@ -37,12 +37,18 @@ const CategoryEdit = (props : CategoryEdit) => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit(onSumit)}>
-          <input type="text" {...register('name', {required:true})} />
-          {errors.name && <span>K duoc de trong</span>}
-          <NavLink className='btn btn-dark' to="/admin/categorys">Back</NavLink>
-          <button className='btn btn-success'>Update</button>
-      </form>
+        <div className="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 className="py-2 h3 mb-0 text-black-800">Sửa danh mục</h1>
+        </div>
+        <form onSubmit={handleSubmit(onSumit)}>
+            <div className="form-group">
+              <label>Tên danh mục</label>
+              <input className='form-control' type="text" {...register('name', {required:true})} />
+             {errors.name && <span className='text-danger'>Bạn chưa điền tên danh mục</span>}
+            </div>
+            <NavLink className='btn btn-dark' to="/admin/categorys">Trở lại</NavLink>
+            <button type="submit" className="btn btn-primary">Cập nhật</button>
+        </form>
     </div>
   )
 }

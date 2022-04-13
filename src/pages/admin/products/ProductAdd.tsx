@@ -1,19 +1,23 @@
 import { ProducType } from '../../../types/product'
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { NavLink, useNavigate } from 'react-router-dom';
+import { CategoryType } from '../../../types/Category';
+import Select from 'react-select'
 
 type ProductAdd = {
     onAdd : (products: ProducType) => void,
-    product: ProducType[]
+    products: ProducType[],
+    onList: (products: ProducType) => void
 }
 
 type FormInput = {
     name: string,
     price: number,
-    categoryid: string
+    description: string,
+    category: string
 }
 
-const ProductAdd = ({onAdd, product}: ProductAdd) => {
+const ProductAdd = ({onAdd, products,onList}: ProductAdd) => {
 
     const {register, handleSubmit, formState: {errors}} = useForm<FormInput>()
     const navigate = useNavigate();
@@ -22,25 +26,20 @@ const ProductAdd = ({onAdd, product}: ProductAdd) => {
         onAdd(data)
         navigate('/admin/products')
     }
-
   return (
     <div>
         <form onSubmit={handleSubmit(onSumit)}>
             <div className="form-group">
-                <label >Name Product</label>
-                <input type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Product Name" {...register('name',{required:true})}/>
+                <label>Tên sản phẩm</label>
+                <input type="text" className="form-control" placeholder="Tên sản phẩm" {...register('name',{required:true})}/>
             </div>
             <div className="form-group">
-                <label htmlFor="exampleInputPassword1">Price</label>
-                <input type="number" className="form-control" id="exampleInputPassword1" placeholder="Price"{...register('price', {required:true})}/>
+                <label>Giá</label>
+                <input type="number" className="form-control" placeholder="Giá sản phẩm"{...register('price', {required:true})}/>
             </div>
             <div className="form-group">
-                <label>Danh mục</label>
-                <select>
-                    {product?.map(item => {
-                        return <option value="">{item.categoryid}</option>
-                    })}
-                </select>
+                <label>Mô tả sản phẩm</label>
+                <input type="text" className="form-control" placeholder="Mô tả sản phẩm"{...register('description', {required:true})}/>
             </div>
             <button type="submit" className="btn btn-success">Add</button>
             <NavLink className="btn btn-warning" to="/admin/products">Back</NavLink>
